@@ -28,7 +28,6 @@ const user_management_1 = require("../management/user/user-management");
 const admin_menu_1 = require("./admin-menu");
 const User_1 = require("../model/User");
 const rl = __importStar(require("readline-sync"));
-// @ts-ignore
 const role_1 = require("../model/role");
 var LoginChoice;
 (function (LoginChoice) {
@@ -42,12 +41,13 @@ class LoginMenu {
     }
     inputUser() {
         let username = this.inputUsername();
-        let regexForPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/g;
+        let regexForPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4}$/g;
         let password = this.inputPassword(regexForPassword);
         this.inputConfirmPassword(password);
         let name = rl.question('Nhập họ tên:');
         let email = this.inputEmail();
-        return new User_1.User(username, password, email, name);
+        let id = user_management_1.UserManagement.id;
+        return new User_1.User(username, id, password, email, name);
     }
     inputEmail() {
         let email = '';

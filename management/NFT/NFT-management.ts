@@ -20,6 +20,7 @@ export class NFTManagement implements INFTManagement{
      }
      updateById(id: number, t: NFT):void {
      }
+
 }
 
 

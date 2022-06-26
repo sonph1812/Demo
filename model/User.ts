@@ -1,14 +1,14 @@
-export class User{
-    private _name:string;
-    private _id:number=0;
-    private _password:string;
-    private _username:string;
-    private _email:string;
-    private _role: number=0;
+export class User {
+    private _name: string;
+    private _id: number;
+    private _password: string;
+    private _username: string;
+    private _email: string;
+    private _role: number = 0;
 
-
-    constructor(name: string, password: string, username: string, email: string) {
+    constructor(name: string,id: number, password: string, username: string, email: string) {
         this._name = name;
+        this._id = id;
         this._password = password;
         this._username = username;
         this._email = email;

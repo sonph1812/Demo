@@ -2,17 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserManagement = void 0;
 const User_1 = require("../../model/User");
+const role_1 = require("../../model/role");
 class UserManagement {
     constructor() {
-        let admin = new User_1.User('admin', '123456', 'son', 'admin@gmail.com');
-        admin.id = UserManagement.id;
-        admin.role = Role.ADMIN;
+        let admin = new User_1.User('admin', 1, "123456", 'son', 'admin@gmail.com');
+        admin.id = UserManagement._id;
+        admin.role = role_1.Role.ADMIN;
         UserManagement.users.push(admin);
     }
     createNew(t) {
-        UserManagement.id++;
-        t.id = UserManagement.id;
-        t.role = Role.USER;
+        UserManagement._id++;
+        t.id = UserManagement._id;
+        t.role = role_1.Role.USER;
         UserManagement.users.push(t);
     }
     getAll() {
@@ -46,6 +47,7 @@ class UserManagement {
     login(username, password) {
         for (let user of UserManagement.users) {
             if (username == user.username && password == user.password) {
+                user.id;
                 return user;
             }
         }
@@ -66,7 +68,13 @@ class UserManagement {
         }
         return null;
     }
+    static get id() {
+        return this._id;
+    }
+    static set id(value) {
+        this._id = value;
+    }
 }
 exports.UserManagement = UserManagement;
 UserManagement.users = [];
-UserManagement.id = 1;
+UserManagement._id = 1;

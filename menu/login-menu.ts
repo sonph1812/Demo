@@ -2,9 +2,7 @@ import {UserManagement} from "../management/user/user-management";
 import {AdminMenu} from "./admin-menu";
 import {User} from "../model/User";
 import  * as rl from "readline-sync"
-// @ts-ignore
 import {Role} from "../model/role"
-
 enum LoginChoice{
     lOGIN =1,
     REGISTER =2
@@ -15,12 +13,13 @@ export  class LoginMenu{
 
     inputUser(): User{
         let username = this.inputUsername();
-        let regexForPassword: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/g;
+        let regexForPassword: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4}$/g;
         let password = this.inputPassword(regexForPassword);
         this.inputConfirmPassword(password);
         let name = rl.question('Nhập họ tên:');
         let email = this.inputEmail();
-        return new User(username, password, email, name);
+        let id = UserManagement.id
+        return new User(username,id,password, email, name);
     }
 
     inputEmail(): string {
