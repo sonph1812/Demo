@@ -30,9 +30,9 @@ export class UserManagement implements IUserManagement {
         }
     }
 
-    findByEmail(email: string): User | null {
+    findByUsername(userName: string): User | null {
         for (let user of UserManagement.users) {
-            if (email == user.email) {
+            if (userName == user.email) {
                 return user;
             }
         }
@@ -50,12 +50,15 @@ export class UserManagement implements IUserManagement {
         return index;
     }
 
-    findByName(username: string): User {
-        return undefined;
-    }
 
-    login(username: string, password: string): User {
-        return undefined;
+    // @ts-ignore
+    login(username: string, password: string): User | null{
+        for ( let user of  UserManagement.users){
+            if(username == user.username && password == user.password){
+                return user;
+            }
+        }
+        return null
     }
 
     updateById(id: number, t: User): void {
@@ -63,5 +66,14 @@ export class UserManagement implements IUserManagement {
         if (index != -1) {
             UserManagement.users[index] = t;
         }
+    }
+    // @ts-ignore
+    findByEmail(email: string): User |null{
+        for(let user of UserManagement.users){
+            if (email == user.email){
+                return user;
+            }
+        }
+        return null;
     }
 }

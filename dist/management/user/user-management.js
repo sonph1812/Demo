@@ -24,9 +24,9 @@ class UserManagement {
             UserManagement.users.splice(index, 1);
         }
     }
-    findByEmail(email) {
+    findByUsername(userName) {
         for (let user of UserManagement.users) {
-            if (email == user.email) {
+            if (userName == user.email) {
                 return user;
             }
         }
@@ -42,17 +42,29 @@ class UserManagement {
         }
         return index;
     }
-    findByName(username) {
-        return undefined;
-    }
+    // @ts-ignore
     login(username, password) {
-        return undefined;
+        for (let user of UserManagement.users) {
+            if (username == user.username && password == user.password) {
+                return user;
+            }
+        }
+        return null;
     }
     updateById(id, t) {
         let index = this.findById(id);
         if (index != -1) {
             UserManagement.users[index] = t;
         }
+    }
+    // @ts-ignore
+    findByEmail(email) {
+        for (let user of UserManagement.users) {
+            if (email == user.email) {
+                return user;
+            }
+        }
+        return null;
     }
 }
 exports.UserManagement = UserManagement;
