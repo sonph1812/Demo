@@ -1,6 +1,6 @@
 import * as rl from 'readline-sync';
-import {NFT} from "../model/NFT";
-import {NFTmenu} from "./NFT-menu";
+import {NFT} from "../../model/NFT";
+import {NFTUsermenu} from "../NFT-User-menu/NFT-user-menu";
 
 enum AdminChoice {
     NFT_MANAGEMENT = 1,
@@ -8,7 +8,7 @@ enum AdminChoice {
 }
 
 export class AdminMenu {
-    private nftMenu = new NFTmenu();
+    private nftMenu = new NFTUsermenu();
     // private categoryMenu = new CategoryMenu();
 
     run() {
@@ -18,7 +18,7 @@ export class AdminMenu {
             console.log('1.NFT MENU')
             console.log('2.CATEGORY MENU')
             console.log('0. LOG OUT ')
-            choice = +rl.question('Please Making Selection')
+            choice = +rl.question('Please Making Selection: ')
             switch (choice) {
                 case AdminChoice.NFT_MANAGEMENT: {
                     this.nftMenu.run();

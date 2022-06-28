@@ -5,7 +5,7 @@ const User_1 = require("../../model/User");
 const role_1 = require("../../model/role");
 class UserManagement {
     constructor() {
-        let admin = new User_1.User('admin', 1, "123456", 'son', 'admin@gmail.com');
+        let admin = new User_1.User('admin', 1, "son123", 'son', 'admin@gmail.com');
         admin.id = UserManagement._id;
         admin.role = role_1.Role.ADMIN;
         UserManagement.users.push(admin);
@@ -47,7 +47,7 @@ class UserManagement {
     login(username, password) {
         for (let user of UserManagement.users) {
             if (username == user.username && password == user.password) {
-                user.id;
+                // UserManagement.session = new SessionManagement(user)
                 return user;
             }
         }

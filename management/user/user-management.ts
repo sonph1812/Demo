@@ -10,7 +10,7 @@ export class UserManagement implements IUserManagement {
 
 
     constructor() {
-        let admin = new User('admin', 1,"123456", 'son', 'admin@gmail.com')
+        let admin = new User('admin', 1,"son123", 'son', 'admin@gmail.com')
         admin.id = UserManagement._id;
         admin.role = Role.ADMIN;
         UserManagement.users.push(admin);
@@ -62,7 +62,7 @@ export class UserManagement implements IUserManagement {
     login(username: string, password: string): User | null{
         for ( let user of  UserManagement.users){
             if(username == user.username && password == user.password){
-                UserManagement.session = new SessionManagement(user)
+                // UserManagement.session = new SessionManagement(user)
                 return user;
             }
         }

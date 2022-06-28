@@ -1,15 +1,21 @@
+import { User } from "./User";
+
 export class NFT{
     private _name:string;
-    private _price:string;
+    private _description:string;
     private _id:number;
     private static count: number = 1
+    private _ownBy: number
+    private _createBy: number
 
 
-    constructor(name: string, price: string) {
+    constructor(name: string, description: string,userId:number) {
         this._name = name;
-        this._price = price;
+        this._description = description;
         this._id= NFT.count;
         NFT.count++;
+        this._ownBy = userId;
+        this._createBy =userId;
     }
 
     get name(): string {
@@ -20,12 +26,12 @@ export class NFT{
         this._name = value;
     }
 
-    get price(): string {
-        return this._price;
+    get description(): string {
+        return this._description;
     }
 
-    set price(value: string) {
-        this._price = value;
+    set description(value: string) {
+        this._description = value;
     }
 
     get id(): number {
@@ -34,5 +40,21 @@ export class NFT{
 
     set id(value: number) {
         this._id = value;
+    }
+
+    get ownBy(): number {
+        return this._ownBy;
+    }
+
+    set ownBy(value: number) {
+        this._ownBy = value;
+    }
+
+    get createBy(): number {
+        return this._createBy;
+    }
+
+    set createBy(value: number) {
+        this._createBy = value;
     }
 }

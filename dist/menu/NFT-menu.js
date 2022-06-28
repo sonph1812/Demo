@@ -31,6 +31,10 @@ var NFTchoice;
 (function (NFTchoice) {
     NFTchoice[NFTchoice["SHOW_ALL_NFT"] = 1] = "SHOW_ALL_NFT";
     NFTchoice[NFTchoice["CREATE_NFT"] = 2] = "CREATE_NFT";
+    NFTchoice[NFTchoice["UPDATE_NFT"] = 3] = "UPDATE_NFT";
+    NFTchoice[NFTchoice["DELETE_NFT"] = 4] = "DELETE_NFT";
+    NFTchoice[NFTchoice["FIND_NFT_BYNAME"] = 5] = "FIND_NFT_BYNAME";
+    NFTchoice[NFTchoice["SORT_NFT_BYPRICE"] = 6] = "SORT_NFT_BYPRICE";
 })(NFTchoice || (NFTchoice = {}));
 class NFTmenu {
     constructor() {
@@ -57,6 +61,10 @@ class NFTmenu {
                     this.ShowCreateNFT();
                     break;
                 }
+                case NFTchoice.UPDATE_NFT: {
+                    this.inputProduct();
+                    break;
+                }
             }
         } while (choice != 0);
     }
@@ -64,7 +72,7 @@ class NFTmenu {
         console.log('---NFT List---');
         let NFTs = this.nftManagement.getAll();
         for (let i = 0; i < NFTs.length; i++) {
-            console.log(`${i + 1},${NFTs[i].name},${NFTs[i].price},${NFTs[i].type}`);
+            console.log(`${i + 1},${NFTs[i].name},${NFTs[i].description}`);
         }
     }
     ShowCreateNFT() {
@@ -73,8 +81,12 @@ class NFTmenu {
     }
     inputProduct() {
         let name = rl.question('Add NFT name');
-        let price = rl.question('Add NFT price');
-        return new NFT_1.NFT(name, price);
+        let description = rl.question('Add NFT description');
+        // @ts-ignore
+        return new NFT_1.NFT(name, description);
+    }
+    searchNFTByUserId() {
+        let name = rl.question("re");
     }
 }
 exports.NFTmenu = NFTmenu;

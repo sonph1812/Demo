@@ -43,7 +43,7 @@ class AdminMenu {
             console.log('1.NFT MENU');
             console.log('2.CATEGORY MENU');
             console.log('0. LOG OUT ');
-            choice = +rl.question('Please Making Selection');
+            choice = +rl.question('Please Making Selection: ');
             switch (choice) {
                 case AdminChoice.NFT_MANAGEMENT: {
                     this.nftMenu.run();
