@@ -40,6 +40,7 @@ class LoginMenu {
         this.userManagement = new user_management_1.UserManagement();
         this.adminMenu = new admin_menu_1.AdminMenu();
         this.NFTUserMenu = new NFT_user_menu_1.NFTUsermenu();
+        this.NFTAdminMenu = new admin_menu_1.AdminMenu();
     }
     inputUser() {
         let username = this.inputUsername();
@@ -78,7 +79,7 @@ class LoginMenu {
     inputConfirmPassword(password) {
         let confirmPassword = '';
         do {
-            confirmPassword = rl.question('Type your password :');
+            confirmPassword = rl.question('Retype your password :');
             if (password != confirmPassword) {
                 console.log('Password entered is mismatched !');
             }
@@ -149,9 +150,9 @@ class LoginMenu {
         if (currentUser) {
             console.log('Logged in successfully !');
             if (currentUser.role == role_1.Role.ADMIN) {
-                this.adminMenu.run();
+                this.NFTAdminMenu.run();
             }
-            else {
+            else if (currentUser.role == role_1.Role.USER) {
                 this.NFTUserMenu.run();
             }
         }

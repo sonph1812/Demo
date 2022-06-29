@@ -23,35 +23,39 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NFTMenuadmin = void 0;
+exports.NFTAdminmenu = void 0;
 const NFT_management_1 = require("../../management/NFT/NFT-management");
 const rl = __importStar(require("readline-sync"));
 const NFT_1 = require("../../model/NFT");
+const user_management_1 = require("../../management/user/user-management");
 var NFTchoice;
 (function (NFTchoice) {
     NFTchoice[NFTchoice["SHOW_ALL_NFT"] = 1] = "SHOW_ALL_NFT";
     NFTchoice[NFTchoice["CREATE_NFT"] = 2] = "CREATE_NFT";
     NFTchoice[NFTchoice["UPDATE_NFT"] = 3] = "UPDATE_NFT";
     NFTchoice[NFTchoice["DELETE_NFT"] = 4] = "DELETE_NFT";
-    NFTchoice[NFTchoice["FIND_NFT_BYNAME"] = 5] = "FIND_NFT_BYNAME";
-    NFTchoice[NFTchoice["SORT_NFT_BYPRICE"] = 6] = "SORT_NFT_BYPRICE";
+    NFTchoice[NFTchoice["FIND_NFT_BY_NAME"] = 5] = "FIND_NFT_BY_NAME";
+    NFTchoice[NFTchoice["SORT_NFT_BY_PRICE"] = 6] = "SORT_NFT_BY_PRICE";
+    NFTchoice[NFTchoice["FIND_USER"] = 7] = "FIND_USER";
 })(NFTchoice || (NFTchoice = {}));
-class NFTMenuadmin {
+class NFTAdminmenu {
     constructor() {
         this.nftManagement = new NFT_management_1.NFTManagement();
+        this.userManagement = new user_management_1.UserManagement();
     }
     run() {
         let choice = -1;
         do {
-            console.log('------NFT MANAGEMENT------');
+            console.log('------ADMIN NFT MANAGEMENT------');
             console.log('1. SHOW ALL NFTs');
             console.log('2. ADD A NEW NFT');
             console.log('3. UPDATE NFT');
             console.log('4. DELETE NFT');
             console.log('5. FIND NFT BY NAME');
             console.log('6. SORT NFT BY PRICE');
+            console.log('7. FIND USER');
             console.log('0. RETURN');
-            choice = +rl.question("PLEASE MAKE OPTION");
+            choice = +rl.question("PLEASE MAKE OPTION:  ");
             switch (choice) {
                 case NFTchoice.SHOW_ALL_NFT: {
                     this.ShowAllNFTs();
@@ -67,6 +71,14 @@ class NFTMenuadmin {
                 }
                 case NFTchoice.DELETE_NFT: {
                     this.removeNFT();
+                    break;
+                }
+                case NFTchoice.FIND_NFT_BY_NAME: {
+                    this.findNFTByName();
+                    break;
+                }
+                case NFTchoice.FIND_USER: {
+                    this.SearchUser();
                     break;
                 }
             }
@@ -86,8 +98,8 @@ class NFTMenuadmin {
         console.log("----ADDING DONE----");
     }
     inputProduct() {
-        let name = rl.question('Add NFT name');
-        let description = rl.question('Add NFT description');
+        let name = rl.question('Add NFT name: ');
+        let description = rl.question('Add NFT description: ');
         // @ts-ignore
         return new NFT_1.NFT(name, description);
     }
@@ -95,7 +107,7 @@ class NFTMenuadmin {
         let NFTs = this.nftManagement.getAll();
         console.log(" Fix NFT infomation ");
         for (let i = 0; i < NFTs.length; i++) {
-            console.log(`Name: ${NFTs[i].name} | Description: ${NFTs[i].description}`);
+            console.log(` ID: ${NFTs[i].id},Name: ${NFTs[i].name} | Description: ${NFTs[i].description}`);
         }
         let NFTId = +rl.question("Pick NFT id you want to change: ");
         let indexUpdate = this.nftManagement.findById(NFTId);
@@ -113,9 +125,9 @@ class NFTMenuadmin {
         let NFT = this.nftManagement.getAll();
         console.log("Delete NFT");
         for (const nft of NFT) {
-            console.log(`Name: ${nft.name} | Description: ${nft.description}`);
+            console.log(` ID: ${nft.id},Name: ${nft.name} | Description: ${nft.description}`);
         }
-        let idRemove = +rl.question("Write name you want to delete :");
+        let idRemove = +rl.question("Write name you want to delete: ");
         let lengthNFT = NFT.length;
         this.nftManagement.removeById(idRemove);
         if (lengthNFT !== NFT.length) {
@@ -125,5 +137,27 @@ class NFTMenuadmin {
             console.log("Please Try Again");
         }
     }
+    findNFTByName() {
+        let find = rl.question("Enter name you want to check:  ");
+        let findAccount = this.nftManagement.findByName(find);
+        if (findAccount) {
+            console.log("Result");
+            console.table(findAccount);
+        }
+        else {
+            console.log("Not found Name");
+        }
+    }
+    SearchUser() {
+        let search = rl.question("Write name you want to check");
+        let SearchUser = this.userManagement.findByUsername(search);
+        if (SearchUser) {
+            console.log("--- USER ACCOUNT---");
+            console.log(SearchUser);
+        }
+        else {
+            console.log("** User not match, Please Try Again **");
+        }
+    }
 }
-exports.NFTMenuadmin = NFTMenuadmin;
+exports.NFTAdminmenu = NFTAdminmenu;

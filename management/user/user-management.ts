@@ -58,7 +58,6 @@ export class UserManagement implements IUserManagement {
     }
 
 
-    // @ts-ignore
     login(username: string, password: string): User | null{
         for ( let user of  UserManagement.users){
             if(username == user.username && password == user.password){

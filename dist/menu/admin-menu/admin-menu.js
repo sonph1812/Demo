@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminMenu = void 0;
 const rl = __importStar(require("readline-sync"));
-const NFT_user_menu_1 = require("../NFT-User-menu/NFT-user-menu");
+const NFT_menu_1 = require("./NFT-menu");
 var AdminChoice;
 (function (AdminChoice) {
     AdminChoice[AdminChoice["NFT_MANAGEMENT"] = 1] = "NFT_MANAGEMENT";
@@ -33,9 +33,10 @@ var AdminChoice;
 })(AdminChoice || (AdminChoice = {}));
 class AdminMenu {
     constructor() {
-        this.nftMenu = new NFT_user_menu_1.NFTUsermenu();
+        // private nftMenu = new NFTUsermenu();
+        // private categoryMenu = new CategoryMenu();
+        this.nftAdmin = new NFT_menu_1.NFTAdminmenu();
     }
-    // private categoryMenu = new CategoryMenu();
     run() {
         let choice = -1;
         do {
@@ -46,7 +47,7 @@ class AdminMenu {
             choice = +rl.question('Please Making Selection: ');
             switch (choice) {
                 case AdminChoice.NFT_MANAGEMENT: {
-                    this.nftMenu.run();
+                    this.nftAdmin.run();
                     break;
                 }
                 case AdminChoice.CATEGORY_MANAGEMENT: {

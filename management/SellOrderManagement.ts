@@ -1,5 +1,5 @@
 import { IManagement } from "./i-management";
-import { SellOder } from "../model/SellOrder";
+import { SellOder } from "../model/MarketPlace";
 
 export class SellOrderManagement implements IManagement<SellOder>{
     createNew(t: SellOder): void {

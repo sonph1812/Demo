@@ -3,10 +3,10 @@ import * as rl from "readline-sync"
 import { NFT } from "../../model/NFT";
 
 enum NFTchoice {
-    SHOW_ALL_NFT = 1,
+    SHOW_ALL_MY_NFT = 1,
     CREATE_NFT,
     UPDATE_NFT,
-    DELETE_NFT,
+    DELETE_MY_NFT,
     FIND_NFT_BY_NAME,
     SORT_NFT_BY_PRICE
 }
@@ -18,17 +18,17 @@ export class NFTUsermenu {
     run() {
         let choice = -1;
         do {
-            console.log('------NFT MANAGEMENT------');
-            console.log('1. SHOW ALL NFTs');
+            console.log('------USER NFT MANAGEMENT------');
+            console.log('1. SHOW ALL MY NFTs');
             console.log('2. ADD A NEW NFT');
             console.log('3. UPDATE NFT');
             console.log('4. DELETE NFT');
             console.log('5. FIND NFT BY NAME');
             console.log('6. SORT NFT BY PRICE');
             console.log('0. RETURN');
-            choice = +rl.question("PLEASE MAKE OPTION")
+            choice = +rl.question("PLEASE MAKE OPTION:  ")
             switch (choice) {
-                case NFTchoice.SHOW_ALL_NFT: {
+                case NFTchoice.SHOW_ALL_MY_NFT: {
                     this.ShowAllNFTs();
                     break;
                 }
@@ -40,7 +40,7 @@ export class NFTUsermenu {
                     this.updateNFT()
                     break;
                 }
-                case  NFTchoice.DELETE_NFT: {
+                case  NFTchoice.DELETE_MY_NFT: {
                     this.removeNFT()
                     break;
                 }
@@ -72,8 +72,8 @@ export class NFTUsermenu {
 
 
     inputProduct(): NFT {
-        let name = rl.question('Add NFT name');
-        let description = rl.question('Add NFT description');
+        let name = rl.question('Add NFT name: ');
+        let description = rl.question('Add NFT description: ');
 
         // @ts-ignore
         return new NFT(name, description);
@@ -103,7 +103,7 @@ export class NFTUsermenu {
         for (const nft of NFT) {
             console.log(` ID: ${nft.id},Name: ${nft.name} | Description: ${nft.description}`)
         }
-        let idRemove = +rl.question("Write name you want to delete :")
+        let idRemove = +rl.question("Write name you want to delete: ")
         let lengthNFT = NFT.length;
         this.nftManagement.removeById(idRemove);
         if (lengthNFT !== NFT.length) {
@@ -114,7 +114,7 @@ export class NFTUsermenu {
     }
 
     findNFTByName() {
-        let find: string = rl.question("Enter name you want to check")
+        let find: string = rl.question("Enter name you want to check:  ")
         let findAccount = this.nftManagement.findByName(find)
         if (findAccount) {
             console.log("Result")
@@ -122,6 +122,10 @@ export class NFTUsermenu {
         }else {
             console.log("Not found Name")
         }
+    }
+    BuyNFT(nft:NFT){
+        let choice =-1;
+        let order = nft.()
     }
 }
 

@@ -1,21 +1,23 @@
 import { User } from "./User";
+import { MarketPlace } from "./MarketPlace";
 
-export class NFT{
-    private _name:string;
-    private _description:string;
-    private _id:number;
+export class NFT {
+    private _name: string;
+    private _description: string;
+    private _id: number;
     private static count: number = 1
     private _ownBy: number
     private _createBy: number
+    private _marketplace = new MarketPlace();
 
 
-    constructor(name: string, description: string,userId:number) {
+    constructor(name: string, description: string, userId: number) {
         this._name = name;
         this._description = description;
-        this._id= NFT.count;
+        this._id = NFT.count;
         NFT.count++;
         this._ownBy = userId;
-        this._createBy =userId;
+        this._createBy = userId;
     }
 
     get name(): string {
@@ -56,5 +58,14 @@ export class NFT{
 
     set createBy(value: number) {
         this._createBy = value;
+    }
+
+
+    get marketplace(): MarketPlace {
+        return this._marketplace;
+    }
+
+    set marketplace(value: MarketPlace) {
+        this._marketplace = value;
     }
 }

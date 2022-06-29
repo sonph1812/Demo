@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NFT = void 0;
+const MarketPlace_1 = require("./MarketPlace");
 class NFT {
     constructor(name, description, userId) {
+        this._marketplace = new MarketPlace_1.MarketPlace();
         this._name = name;
         this._description = description;
         this._id = NFT.count;
@@ -39,6 +41,12 @@ class NFT {
     }
     set createBy(value) {
         this._createBy = value;
+    }
+    get marketplace() {
+        return this._marketplace;
+    }
+    set marketplace(value) {
+        this._marketplace = value;
     }
 }
 exports.NFT = NFT;

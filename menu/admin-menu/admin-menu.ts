@@ -1,6 +1,7 @@
 import * as rl from 'readline-sync';
 import {NFT} from "../../model/NFT";
 import {NFTUsermenu} from "../NFT-User-menu/NFT-user-menu";
+import { NFTAdminmenu } from "./NFT-menu";
 
 enum AdminChoice {
     NFT_MANAGEMENT = 1,
@@ -8,9 +9,9 @@ enum AdminChoice {
 }
 
 export class AdminMenu {
-    private nftMenu = new NFTUsermenu();
+    // private nftMenu = new NFTUsermenu();
     // private categoryMenu = new CategoryMenu();
-
+private  nftAdmin = new NFTAdminmenu()
     run() {
         let choice = -1;
         do {
@@ -21,7 +22,7 @@ export class AdminMenu {
             choice = +rl.question('Please Making Selection: ')
             switch (choice) {
                 case AdminChoice.NFT_MANAGEMENT: {
-                    this.nftMenu.run();
+                    this.nftAdmin.run();
                     break;
                 }
                 case AdminChoice.CATEGORY_MANAGEMENT: {

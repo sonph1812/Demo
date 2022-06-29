@@ -14,6 +14,7 @@ export class LoginMenu {
     private userManagement = new UserManagement();
     private adminMenu = new AdminMenu();
     private NFTUserMenu = new NFTUsermenu();
+    private NFTAdminMenu = new AdminMenu()
 
     inputUser(): User {
         let username = this.inputUsername();
@@ -23,7 +24,7 @@ export class LoginMenu {
         let name = rl.question('Enter your name:');
         let email = this.inputEmail();
         let id = UserManagement.id
-        return new User(name,id,password,username,email);
+        return new User(name, id, password, username, email);
     }
 
     inputEmail(): string {
@@ -53,7 +54,7 @@ export class LoginMenu {
     inputConfirmPassword(password: string): void {
         let confirmPassword = '';
         do {
-            confirmPassword = rl.question('Type your password :');
+            confirmPassword = rl.question('Retype your password :');
             if (password != confirmPassword) {
                 console.log('Password entered is mismatched !');
             }
@@ -131,9 +132,11 @@ export class LoginMenu {
 
             if (currentUser.role == Role.ADMIN) {
 
-                this.adminMenu.run();
-            } else{
-             this.NFTUserMenu.run();
+                this.NFTAdminMenu.run();
+            }
+            else if(currentUser.role == Role.USER){
+
+                this.NFTUserMenu.run();
 
 
             }

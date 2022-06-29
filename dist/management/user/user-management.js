@@ -43,7 +43,6 @@ class UserManagement {
         }
         return index;
     }
-    // @ts-ignore
     login(username, password) {
         for (let user of UserManagement.users) {
             if (username == user.username && password == user.password) {
