@@ -7,8 +7,8 @@ enum NFTchoice {
     CREATE_NFT,
     UPDATE_NFT,
     DELETE_NFT,
-    FIND_NFT_BYNAME,
-    SORT_NFT_BYPRICE
+    FIND_NFT_BY_NAME,
+    SORT_NFT_BY_PRICE
 }
 
 export class NFTUsermenu {
@@ -40,9 +40,13 @@ export class NFTUsermenu {
                     this.updateNFT()
                     break;
                 }
-                case  NFTchoice.DELETE_NFT:{
+                case  NFTchoice.DELETE_NFT: {
                     this.removeNFT()
                     break;
+                }
+                case  NFTchoice.FIND_NFT_BY_NAME: {
+                    this.findNFTByName()
+                    break
                 }
             }
 
@@ -92,7 +96,8 @@ export class NFTUsermenu {
             console.log("Wrong ID")
         }
     }
-    removeNFT():void{
+
+    removeNFT(): void {
         let NFT = this.nftManagement.getAll();
         console.log("Delete NFT")
         for (const nft of NFT) {
@@ -101,13 +106,26 @@ export class NFTUsermenu {
         let idRemove = +rl.question("Write name you want to delete :")
         let lengthNFT = NFT.length;
         this.nftManagement.removeById(idRemove);
-        if(lengthNFT !== NFT.length){
+        if (lengthNFT !== NFT.length) {
             console.log("Delete Done");
-        }else{
+        } else {
             console.log("Please Try Again");
         }
     }
 
-
+    findNFTByName() {
+        let find: string = rl.question("Enter name you want to check")
+        let findAccount = this.nftManagement.findByName(find)
+        if (findAccount) {
+            console.log("Result")
+            console.table(findAccount)
+        }else {
+            console.log("Not found Name")
+        }
+    }
 }
+
+
+
+
 

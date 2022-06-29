@@ -3,7 +3,7 @@ import { NFT } from "../../model/NFT";
 
 export class NFTManagement implements INFTManagement {
     private static id: number = 0;
-    private static NFTs: NFT[] = [];
+    static NFTs: NFT[] = [];
 
     createNew(nft: NFT): void {
         NFTManagement.id++;
@@ -21,14 +21,14 @@ export class NFTManagement implements INFTManagement {
         }
         return index
     }
-    findByName(name: string):string{
-        let index =-1;
-        for (let i = 0; i < NFTManagement.NFTs.length; i++) {
-            if(NFTManagement.NFTs[i].name ==name){
-                index = i;
+    findByName(name: string):NFT | null{
+        for (let nft of NFTManagement.NFTs) {
+            if(name == nft.name){
+                return  nft
+                break
             }
         }
-        return name
+        return  null
     }
 
     getAll(): NFT[] {

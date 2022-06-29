@@ -17,13 +17,13 @@ class NFTManagement {
         return index;
     }
     findByName(name) {
-        let index = -1;
-        for (let i = 0; i < NFTManagement.NFTs.length; i++) {
-            if (NFTManagement.NFTs[i].name == name) {
-                index = i;
+        for (let nft of NFTManagement.NFTs) {
+            if (name == nft.name) {
+                return nft;
+                break;
             }
         }
-        return name;
+        return null;
     }
     getAll() {
         return NFTManagement.NFTs;
