@@ -8,7 +8,8 @@ export class NFT {
     private static count: number = 1
     private _ownBy: number
     private _createBy: number
-    private _marketplace = new MarketPlace();
+    private _marketplace = new MarketPlace("Dragon", "Monster");
+    static price: number;
 
 
     constructor(name: string, description: string, userId: number) {

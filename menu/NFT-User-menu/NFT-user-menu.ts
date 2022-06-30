@@ -1,6 +1,9 @@
 import { NFTManagement } from "../../management/NFT/NFT-management";
 import * as rl from "readline-sync"
 import { NFT } from "../../model/NFT";
+import { User } from "../../model/User";
+import { MarketplaceManagement } from "../../management/marketplace-management";
+import { SellOrder } from "../../model/SellOrder";
 
 enum NFTchoice {
     SHOW_ALL_MY_NFT = 1,
@@ -13,6 +16,7 @@ enum NFTchoice {
 
 export class NFTUsermenu {
     private nftManagement = new NFTManagement();
+    private marketplaceManagement = new MarketplaceManagement()
 
 
     run() {
@@ -123,9 +127,12 @@ export class NFTUsermenu {
             console.log("Not found Name")
         }
     }
-    BuyNFT(nft:NFT){
-        let choice =-1;
-        let order = nft.()
+    SelectOrder(user:User){
+        let MarketPlace = this.marketplaceManagement.getAll();
+        let SellOrderUser = user.getSellOrder();
+        for (let i = 0; i < MarketPlace.length; i++) {
+
+        }
     }
 }
 

@@ -27,6 +27,7 @@ exports.NFTUsermenu = void 0;
 const NFT_management_1 = require("../../management/NFT/NFT-management");
 const rl = __importStar(require("readline-sync"));
 const NFT_1 = require("../../model/NFT");
+const marketplace_management_1 = require("../../management/marketplace-management");
 var NFTchoice;
 (function (NFTchoice) {
     NFTchoice[NFTchoice["SHOW_ALL_MY_NFT"] = 1] = "SHOW_ALL_MY_NFT";
@@ -39,6 +40,7 @@ var NFTchoice;
 class NFTUsermenu {
     constructor() {
         this.nftManagement = new NFT_management_1.NFTManagement();
+        this.marketplaceManagement = new marketplace_management_1.MarketplaceManagement();
     }
     run() {
         let choice = -1;
@@ -140,9 +142,11 @@ class NFTUsermenu {
             console.log("Not found Name");
         }
     }
-    BuyNFT(nft) {
-        let choice = -1;
-        let order = nft.();
+    SelectOrder(user) {
+        let MarketPlace = this.marketplaceManagement.getAll();
+        let SellOrderUser = user.getSellOrder();
+        for (let i = 0; i < MarketPlace.length; i++) {
+        }
     }
 }
 exports.NFTUsermenu = NFTUsermenu;

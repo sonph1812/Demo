@@ -3,8 +3,9 @@ import { NFT } from "./NFT";
 export class MarketPlace {
     private _totalMoney: number = 0
     private _arrNFT: NFT[] = [];
+    _id?: number;
 
-    constructor() {
+    constructor(name: string, description: string,id?:number) {
     }
 
     get totalMoney(): number {
@@ -23,7 +24,8 @@ export class MarketPlace {
         this._arrNFT = value;
     }
 
-    add(t: NFT): void {
+    add(t: MarketPlace): void {
+        // @ts-ignore
         this._arrNFT.push(t);
     }
 

@@ -1,3 +1,6 @@
+import { MarketPlace } from "./MarketPlace";
+import { SellOrder } from "./SellOrder";
+
 export class User {
     private _name: string;
     private _id: number;
@@ -5,8 +8,9 @@ export class User {
     private _username: string;
     private _email: string;
     private _role: number = 0;
+    private sellOrder = new SellOrder();
 
-    constructor(name: string,id: number, password: string, username: string, email: string) {
+    constructor(name: string, id: number, password: string, username: string, email: string) {
         this._name = name;
         this._id = id;
         this._password = password;
@@ -61,4 +65,34 @@ export class User {
     set role(value: number) {
         this._role = value;
     }
+
+    addToSellOrder(t: MarketPlace) {
+        this.sellOrder.add(t);
+    }
+
+    getSellOrder(): number {
+        return this.sellOrder.getTotal()
+    }
+
+    findToSellOrder(index: number): MarketPlace | null {
+        let Marketplace = this.sellOrder.findByIndex(index)
+        if (Marketplace) {
+            // @ts-ignore
+            return MarketPlace
+        } else {
+            return null
+        }
+
+    }
+    findBySellOrder(){
+        // @ts-ignore
+        let marketplace = this.sellOrder.findBySellOrder(t)
+        if(marketplace){
+            return true
+        }else {
+            return  false
+        }
+    }
+
 }
+
